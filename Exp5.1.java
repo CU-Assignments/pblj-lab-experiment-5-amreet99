@@ -9,13 +9,62 @@ Steps to implement:
 4. Parse Strings: Create a utility method to parse strings to integers using Integer.parseInt().
 5. Calculate the Sum: Use a loop or Java 8 streams to calculate the sum of the list.
 
-  
 Java Program:
-
 parseStringToInteger(): This method parses a string into an Integer. It catches any NumberFormatException if the string is not a valid number.
 calculateSum(): This method calculates the sum of a list of integers. Java automatically performs unboxing when adding Integer values to sum (an int).
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+public class SimpleAutoboxingUnboxingSum {
+
+    public static Integer parseStringToInteger(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number format: " + str);
+            return null;
+        }
+    }
+
+    public static int calculateSum(List<Integer> numbers) {
+        int sum = 0;
+        for (Integer num : numbers) {
+            if (num != null) {
+                sum += num;
+            }
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> numbers = new ArrayList<>();
+
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(parseStringToInteger("30"));
+        numbers.add(parseStringToInteger("40"));
+
+        System.out.println("The sum of the list is: " + calculateSum(numbers));
+
+        numbers.clear();
+
+        numbers.add(parseStringToInteger("50"));
+        numbers.add(parseStringToInteger("60"));
+        numbers.add(parseStringToInteger("70"));
+
+        System.out.println("The sum of the list is: " + calculateSum(numbers));
+
+        numbers.clear();
+
+        numbers.add(parseStringToInteger("80"));
+        numbers.add(parseStringToInteger("invalid"));
+        numbers.add(parseStringToInteger("90"));
+
+        System.out.println("The sum of the list is: " + calculateSum(numbers));
+    }
+}
 
 
 Test Cases:
